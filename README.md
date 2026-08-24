@@ -2,8 +2,11 @@
 # Proyecto Final Programación Web
 **Tienda en Linea - Xucle-Bits**
 
-## Equipo
-- Roberto Antonio Matamoros (Grupo 1)
+(Grupo 1)
+- Berta Maria Perdomo Paredes
+- Roberto Antonio Matamoros Zavala
+- Joshua Emil Miguel Tomas
+- Cristian Alejandro Andino Morales
 
 ## Objetivo
 Diseñar e implementar una aplicacion web funcional para una tienda en línea de **tecnologia**, integrando los conceptos aprendidos durante el curso.
