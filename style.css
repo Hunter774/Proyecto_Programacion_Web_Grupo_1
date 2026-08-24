@@ -11,7 +11,9 @@ body {
   color: white;
 }
 
+
 /* Encabezado */
+
 .header {
   background: rgba(5, 15, 27, 0.88);
   border-bottom: 1px solid rgba(0, 140, 255, 0.25);
@@ -26,17 +28,16 @@ body {
   align-items: center;
   gap: 10px;
 }
+
 .logo-img {
-  width: 40px;   
-  height: auto;  
-  margin-right: 10px;
+  width: 50px;
+  height: auto;
+  margin-right: 5px;
 }
 
 .logo h1 {
   font-size: 28px;
-  background: linear-gradient(90deg, #ffffff, #4db8ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #4db8ff;
 }
 
 nav ul {
@@ -51,17 +52,32 @@ nav a {
   font-weight: bold;
 }
 
-/* Catalogo */
-.catalogo {
+
+/* Contenido general */
+
+.catalogo,
+.pagina {
   padding: 40px;
+}
+
+.catalogo {
   text-align: center;
 }
 
-.catalogo h2 {
-  margin-bottom: 25px;
+.catalogo h2,
+.pagina h2 {
+  margin-bottom: 15px;
   font-size: 32px;
   color: #4db8ff;
 }
+
+.subtitulo {
+  margin-bottom: 25px;
+  color: #a9b7c7;
+}
+
+
+/* Productos */
 
 .productos {
   display: flex;
@@ -83,7 +99,6 @@ nav a {
   justify-content: space-between;
 }
 
-
 .card img {
   width: 100%;
   border-radius: 8px;
@@ -95,29 +110,174 @@ nav a {
   color: #fff;
 }
 
-.card p {
+.precio {
   margin-bottom: 12px;
   color: #a9b7c7;
 }
 
-.card button {
+
+/* Botones */
+
+.btn-principal,
+.btn-secundario,
+.btn-eliminar,
+.btn-comprar {
+  display: inline-block;
   border: none;
   padding: 10px 20px;
   border-radius: 8px;
-  background: linear-gradient(135deg, #0077ff, #0051b8);
   color: white;
   font-weight: bold;
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-   margin-top: auto; /* empuja el boton hacia abajo no borrar xd */
+  text-decoration: none;
 }
 
-.card button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 30px rgba(0, 110, 255, 0.35);
+.btn-principal {
+  background: linear-gradient(135deg, #0077ff, #0051b8);
 }
+
+.btn-secundario {
+  background: #5e6a76;
+}
+
+.btn-eliminar {
+  background: #ff3b3b;
+}
+
+.btn-comprar {
+  background: linear-gradient(135deg, #00c853, #009624);
+}
+
+
+/* Formularios */
+
+.formulario {
+  max-width: 650px;
+  margin: 25px auto;
+  padding: 25px;
+  background: rgba(5, 15, 27, 0.88);
+  border: 1px solid rgba(0, 140, 255, 0.25);
+  border-radius: 12px;
+}
+
+.formulario label {
+  display: block;
+  margin-bottom: 6px;
+  color: #d7e6f4;
+}
+
+.formulario input,
+.formulario select,
+.formulario textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #72869a;
+}
+
+.formulario textarea {
+  min-height: 100px;
+}
+
+.form-acciones {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+
+/* Tablas */
+
+.tabla-contenedor {
+  margin-top: 25px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(5, 15, 27, 0.88);
+}
+
+th,
+td {
+  padding: 12px;
+  border: 1px solid rgba(77, 184, 255, 0.25);
+  text-align: left;
+}
+
+th {
+  color: #4db8ff;
+}
+
+
+/* Estado de productos */
+
+.estado {
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.activo {
+  background: #009624;
+}
+
+.inactivo {
+  background: #8a2f2f;
+}
+
+
+/* Detalle del producto */
+
+.detalle-producto {
+  display: flex;
+  gap: 30px;
+  max-width: 900px;
+  margin: 25px auto;
+  padding: 25px;
+  background: rgba(5, 15, 27, 0.88);
+  border: 1px solid rgba(0, 140, 255, 0.25);
+  border-radius: 12px;
+}
+
+.detalle-producto img {
+  width: 320px;
+  border-radius: 10px;
+  background: white;
+}
+
+.detalle-info p,
+.detalle-info li {
+  margin-bottom: 10px;
+  color: #d7e6f4;
+}
+
+.detalle-info ul {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+
+/* Términos y privacidad */
+
+.texto-legal {
+  max-width: 900px;
+  margin: 25px auto;
+  padding: 25px;
+  background: rgba(5, 15, 27, 0.88);
+  border-radius: 12px;
+}
+
+.texto-legal p {
+  margin-bottom: 15px;
+  line-height: 1.5;
+  color: #d7e6f4;
+}
+
 
 /* Footer */
+
 .footer {
   background: rgba(5, 15, 27, 0.88);
   border-top: 1px solid rgba(0, 140, 255, 0.25);
@@ -130,6 +290,40 @@ nav a {
   color: #4db8ff;
   text-decoration: none;
   margin: 0 5px;
+}
+
+
+/* Responsive */
+
+@media(max-width:700px) {
+
+  .header {
+    flex-direction: column;
+  }
+
+  .header nav {
+    margin-top: 15px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+
+  .detalle-producto {
+    flex-direction: column;
+  }
+
+  .detalle-producto img {
+    width: 100%;
+  }
+
+  .catalogo,
+  .pagina {
+    padding: 25px 15px;
+  }
+
 }
 
 
