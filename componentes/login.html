@@ -1,10 +1,95 @@
-<form class="formulario">
-    <label for="usuario">Usuario:</label>
-    <input type="text" id="usuario" required>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administrador - Xucle-Bits</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
 
-    <label for="contrasena">Contraseña:</label>
-    <input type="password" id="contrasena" required>
-</form>
-<a href="registro.html" class="btn-secundario">
-    Registrar Administrador
-</a>
+<body>
+
+  <header class="header">
+
+    <div class="logo">
+
+      <img src="../icons/Icono.png"
+           alt="Logo Xucle-Bits"
+           class="logo-img">
+
+      <h1>Xucle-Bits</h1>
+
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="../index.html#productos">Productos</a></li>
+        <li><a href="carrito.html">Carrito</a></li>
+      </ul>
+    </nav>
+
+  </header>
+
+
+  <main class="pagina">
+
+    <h2>Acceso Administrativo</h2>
+
+    <form class="formulario">
+
+      <label for="usuario">
+        Usuario:
+      </label>
+
+      <input type="text"
+             id="usuario"
+             required>
+
+
+      <label for="contrasena">
+        Contraseña:
+      </label>
+
+      <input type="password"
+             id="contrasena"
+             required>
+
+
+      <div class="form-acciones">
+
+        <a href="producto.html"
+           class="btn-principal">
+          Ingresar
+        </a>
+
+        <a href="registro.html"
+           class="btn-secundario">
+          Registrar Administrador
+        </a>
+
+      </div>
+
+    </form>
+
+  </main>
+
+
+  <footer class="footer">
+
+    <p>&copy; 2026 Xucle-Bits</p>
+
+    <a href="terminos.html">
+      Términos y Condiciones
+    </a>
+
+    |
+
+    <a href="privacidad.html">
+      Políticas de Privacidad
+    </a>
+
+  </footer>
+
+</body>
+</html>
