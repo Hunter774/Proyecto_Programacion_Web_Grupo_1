@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>
+    Editar Producto - Xucle-Bits
+  </title>
+
+  <link rel="stylesheet"
+        href="../style.css">
+
+</head>
+
+<body>
+
+  <header class="header">
+
+    <div class="logo">
+
+      <img src="../icons/Icono.png"
+           alt="Logo Xucle-Bits"
+           class="logo-img">
+
+      <h1>Xucle-Bits Admin</h1>
+
+    </div>
+
+    <nav>
+
+      <ul>
+
+        <li>
+          <a href="producto.html">
+            Productos
+          </a>
+        </li>
+
+        <li>
+          <a href="Reportes.html">
+            Reportes
+          </a>
+        </li>
+
+      </ul>
+
+    </nav>
+
+  </header>
+
+
+  <main class="pagina">
+
+    <h2>
+      Editar Producto
+    </h2>
+
+
+    <form class="formulario">
+
+      <label for="nombre">
+        Nombre del producto:
+      </label>
+
+      <input type="text"
+             id="nombre"
+             value="Laptop Gamer"
+             required>
+
+
+      <label for="descripcion">
+        Descripción:
+      </label>
+
+      <textarea id="descripcion"
+                required>Computadora portátil para estudio, trabajo y entretenimiento.</textarea>
+
+
+      <label for="precio">
+        Precio:
+      </label>
+
+      <input type="number"
+             id="precio"
+             value="1200"
+             required>
+
+
+      <label for="stock">
+        Cantidad:
+      </label>
+
+      <input type="number"
+             id="stock"
+             value="10"
+             required>
+
+
+      <label for="color">
+        Color:
+      </label>
+
+      <input type="text"
+             id="color"
+             value="Negro">
+
+
+      <label for="estado">
+        Estado:
+      </label>
+
+      <select id="estado"
+              required>
+
+        <option value="activo"
+                selected>
+          Activo
+        </option>
+
+        <option value="inactivo">
+          Inactivo
+        </option>
+
+      </select>
+
+
+      <label for="imagen">
+        URL de imagen:
+      </label>
+
+      <input type="text"
+             id="imagen"
+             value="https://m.media-amazon.com/images/I/71EjPGMpNgL._AC_SX679_.jpg">
+
+
+      <div class="form-acciones">
+
+        <button type="button"
+                class="btn-principal">
+          Guardar Cambios
+        </button>
+
+        <a href="producto.html"
+           class="btn-secundario">
+          Cancelar
+        </a>
+
+      </div>
+
+    </form>
+
+  </main>
+
+
+  <footer class="footer">
+
+    <p>
+      &copy; 2026 Xucle-Bits - Administración
+    </p>
+
+  </footer>
+
+</body>
+</html>
