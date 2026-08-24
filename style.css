@@ -26,6 +26,11 @@ body {
   align-items: center;
   gap: 10px;
 }
+.logo-img {
+  width: 40px;   
+  height: auto;  
+  margin-right: 10px;
+}
 
 .logo h1 {
   font-size: 28px;
@@ -46,7 +51,7 @@ nav a {
   font-weight: bold;
 }
 
-/* Catálogo */
+/* Catalogo */
 .catalogo {
   padding: 40px;
   text-align: center;
