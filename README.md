@@ -4,7 +4,7 @@
 
 (Grupo 1)
 - Berta Maria Perdomo Paredes
-- Roberto Antonio Matamoros Zavala
+- Roberto Antonio Matamoros Zelaya
 - Joshua Emil Miguel Tomas
 - Cristian Alejandro Andino Morales
 
