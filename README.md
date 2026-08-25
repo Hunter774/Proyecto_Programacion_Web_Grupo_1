@@ -3,10 +3,7 @@
 **Tienda en Linea - Xucle-Bits**
 
 (Grupo 1)
-- Berta Maria Perdomo Paredes
 - Roberto Antonio Matamoros Zelaya
-- Joshua Emil Miguel Tomas
-- Cristian Alejandro Andino Morales
 
 ## Objetivo
 Diseñar e implementar una aplicacion web funcional para una tienda en línea de **tecnologia**, integrando los conceptos aprendidos durante el curso.
