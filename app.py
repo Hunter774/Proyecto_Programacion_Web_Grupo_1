@@ -4,7 +4,7 @@ from conexion import ConexionDB
 db = ConexionDB(
     host="bdpw.mysql.database.azure.com",
     user="Hunter774575@bdpw",
-    password="TuPassword123",
+    password="Darkhunter77*", #Esto debe ser variable de entorno ajajaja
     db="tienda"
 )
 
