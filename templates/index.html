@@ -12,7 +12,7 @@
 
     <div class="logo">
       <img src="{{ url_for('static', filename='icons/Icono.png') }}" 
-     alt="Logo Xucle-Bits" class="logo-img">
+           alt="Logo Xucle-Bits" class="logo-img">
       <h1>X-Bits</h1>
     </div>
 
@@ -36,58 +36,8 @@
       Tecnología para estudiar, trabajar y disfrutar.
     </p>
 
-    <div class="productos">
-
-      <div class="card">
-
-        <img src="https://m.media-amazon.com/images/I/71EjPGMpNgL._AC_SX679_.jpg"
-             alt="Laptop Gamer">
-
-        <h3>Laptop Gamer</h3>
-
-        <p class="precio">$1200</p>
-
-        <a class="btn-principal"
-           href="componentes/detalle.html">
-          Ver Detalle
-        </a>
-
-      </div>
-
-
-      <div class="card">
-
-        <img src="https://m.media-amazon.com/images/I/71pszRoOwUL._AC_SY741_.jpg"
-             alt="Smartphone 5G">
-
-        <h3>Smartphone 5G</h3>
-
-        <p class="precio">$800</p>
-
-        <a class="btn-principal"
-           href="componentes/detalle.html">
-          Ver Detalle
-        </a>
-
-      </div>
-
-
-      <div class="card">
-
-        <img src="https://m.media-amazon.com/images/I/31yq9PU7LDL._SS400_.jpg"
-             alt="Audífonos Bluetooth">
-
-        <h3>Audífonos Bluetooth</h3>
-
-        <p class="precio">$150</p>
-
-        <a class="btn-principal"
-           href="componentes/detalle.html">
-          Ver Detalle
-        </a>
-
-      </div>
-
+    <!--render de los productos dinamicamente -->
+    <div class="productos" id="productos-container">
     </div>
 
   </main>
@@ -109,9 +59,33 @@
 
   </footer>
 
+  <!-- script para jalar productos desde el endpoint -->
+  <script>
+    fetch("/productos")
+      .then(res => res.json())
+      .then(data => {
+        const contenedor = document.getElementById("productos-container");
+        contenedor.innerHTML = "";
+        data.forEach(p => {
+          contenedor.innerHTML += `
+            <div class="card">
+              <img src="${p.imagen}" alt="${p.nombre}">
+              <h3>${p.nombre}</h3>
+              <p class="precio">$${p.precio}</p>
+              <a class="btn-principal" href="componentes/detalle.html?id=${p.id}">
+                Ver Detalle
+              </a>
+            </div>
+          `;
+        });
+      })
+      .catch(err => {
+        console.error("Error cargando productos:", err);
+      });
+  </script>
+
 </body>
 </html>
-
 
 <!--
 -El nombre todavia es debatible ajaja
