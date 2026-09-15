@@ -3,7 +3,7 @@ from conexion import ConexionDB
 
 db = ConexionDB(
     host="bdppw.mysql.database.azure.com",
-    user="Hunter774575",
+    user="Hunter774575@bdppw"
     password="Darkhunter77*",
     db="xbits"
 )
