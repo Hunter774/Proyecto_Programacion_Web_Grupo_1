@@ -1,0 +1,341 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  background: radial-gradient(circle at 50% 40%, #0d2a4a 0%, #071321 35%, #03070d 75%);
+  color: white;
+}
+
+
+/* Encabezado */
+
+.header {
+  background: rgba(5, 15, 27, 0.88);
+  border-bottom: 1px solid rgba(0, 140, 255, 0.25);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-img {
+  width: 50px;
+  height: auto;
+  margin-right: 5px;
+}
+
+.logo h1 {
+  font-size: 28px;
+  color: #4db8ff;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  color: #4db8ff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+
+/* Contenido general */
+
+.catalogo,
+.pagina {
+  padding: 40px;
+}
+
+.catalogo {
+  text-align: center;
+}
+
+.catalogo h2,
+.pagina h2 {
+  margin-bottom: 15px;
+  font-size: 32px;
+  color: #4db8ff;
+}
+
+.subtitulo {
+  margin-bottom: 25px;
+  color: #a9b7c7;
+}
+
+
+/* Productos */
+
+.productos {
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: rgba(5, 15, 27, 0.88);
+  border: 1px solid rgba(0, 140, 255, 0.25);
+  border-radius: 12px;
+  padding: 20px;
+  width: 220px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(0, 140, 255, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.card h3 {
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.precio {
+  margin-bottom: 12px;
+  color: #a9b7c7;
+}
+
+
+/* Botones */
+
+.btn-principal,
+.btn-secundario,
+.btn-eliminar,
+.btn-comprar {
+  display: inline-block;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-principal {
+  background: linear-gradient(135deg, #0077ff, #0051b8);
+}
+
+.btn-secundario {
+  background: #5e6a76;
+}
+
+.btn-eliminar {
+  background: #ff3b3b;
+}
+
+.btn-comprar {
+  background: linear-gradient(135deg, #00c853, #009624);
+}
+
+
+/* Formularios */
+
+.formulario {
+  max-width: 650px;
+  margin: 25px auto;
+  padding: 25px;
+  background: rgba(5, 15, 27, 0.88);
+  border: 1px solid rgba(0, 140, 255, 0.25);
+  border-radius: 12px;
+}
+
+.formulario label {
+  display: block;
+  margin-bottom: 6px;
+  color: #d7e6f4;
+}
+
+.formulario input,
+.formulario select,
+.formulario textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #72869a;
+}
+
+.formulario textarea {
+  min-height: 100px;
+}
+
+.form-acciones {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+
+/* Tablas */
+
+.tabla-contenedor {
+  margin-top: 25px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(5, 15, 27, 0.88);
+}
+
+th,
+td {
+  padding: 12px;
+  border: 1px solid rgba(77, 184, 255, 0.25);
+  text-align: left;
+}
+
+th {
+  color: #4db8ff;
+}
+
+
+/* Estado de productos */
+
+.estado {
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.activo {
+  background: #009624;
+}
+
+.inactivo {
+  background: #8a2f2f;
+}
+
+
+/* Detalle del producto */
+
+.detalle-producto {
+  display: flex;
+  gap: 30px;
+  max-width: 900px;
+  margin: 25px auto;
+  padding: 25px;
+  background: rgba(5, 15, 27, 0.88);
+  border: 1px solid rgba(0, 140, 255, 0.25);
+  border-radius: 12px;
+}
+
+.detalle-producto img {
+  width: 320px;
+  border-radius: 10px;
+  background: white;
+}
+
+.detalle-info p,
+.detalle-info li {
+  margin-bottom: 10px;
+  color: #d7e6f4;
+}
+
+.detalle-info ul {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+
+/* Términos y privacidad */
+
+.texto-legal {
+  max-width: 900px;
+  margin: 25px auto;
+  padding: 25px;
+  background: rgba(5, 15, 27, 0.88);
+  border-radius: 12px;
+}
+
+.texto-legal p {
+  margin-bottom: 15px;
+  line-height: 1.5;
+  color: #d7e6f4;
+}
+
+
+/* Footer */
+
+.footer {
+  background: rgba(5, 15, 27, 0.88);
+  border-top: 1px solid rgba(0, 140, 255, 0.25);
+  text-align: center;
+  padding: 15px;
+  color: #a9b7c7;
+}
+
+.footer a {
+  color: #4db8ff;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+
+/* Responsive */
+
+@media(max-width:700px) {
+
+  .header {
+    flex-direction: column;
+  }
+
+  .header nav {
+    margin-top: 15px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+  }
+
+  .detalle-producto {
+    flex-direction: column;
+  }
+
+  .detalle-producto img {
+    width: 100%;
+  }
+
+  .catalogo,
+  .pagina {
+    padding: 25px 15px;
+  }
+
+}
+
+
+/*Cosas por hacer
+
+-Revisar error del Tenant
+-Mejorar la paleta de colores
+-Buscar plantilals de Boostrap
+-Cambiar el recurso de Static web a Web App (Por si se quiere usar funciones de backend)
+-Seguir revisando :v
+-Crear mas brances del repositorio para que no se sobreescriba el codigo
+-Arreglar el error de la imagen de los productos 
+
+*/
+
