@@ -1,6 +1,14 @@
 from flask import Flask, render_template
 from conexion import ConexionDB
 
+db = ConexionDB(
+    host="bdpw.mysql.database.azure.com",
+    user="Hunter774575@bdpw",
+    password="TuPassword123",
+    db="tienda"
+)
+
+
 app = Flask(__name__)
 
 @app.route("/")
