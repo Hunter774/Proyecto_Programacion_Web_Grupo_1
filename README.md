@@ -2,11 +2,8 @@
 # Proyecto Final Programación Web
 **Tienda en Linea - Xucle-Bits**
 
-(Grupo 1)
-- Berta Maria Perdomo Paredes
+(Grupo ??)
 - Roberto Antonio Matamoros Zelaya
-- Joshua Emil Miguel Tomas
-- Cristian Alejandro Andino Morales
 
 ## Objetivo
 Diseñar e implementar una aplicacion web funcional para una tienda en línea de **tecnologia**, integrando los conceptos aprendidos durante el curso.
@@ -112,12 +109,28 @@ Proyecto_Programacion_Web_Grupo_1-main
 
 ## Enlaces
 - Repositorio: https://github.com/Hunter774/Proyecto_Programacion_Web_Grupo_1
-- Despliegue: https://salmon-grass-027d04410.7.azurestaticapps.net/
+- Despliegue: webapp123-ckagcjc4f5c3frae.centralus-01.azurewebsites.net
 
 ## Entregables
 - **Avance I (Semana 5, 23/08/26)** → Diseño grafico de las páginas.  
 - **Avance II (Semana 8, 13/09/26)** → Arquitectura basica de manipulacion de datos.  
 - **Entrega Final (Semana 10, 21/09/26)** → Proyecto completo con backend y frontend.  
+
+## Segundo Avance - Notas de Desarrollo
+
+**Infraestructura y Despliegue (Azure):** 
+  - Se migro correctamente el despliegue de **Static Web** a **Web App**
+  - Se configuró y desplegó la infraestructura base del proyecto en la nube, incluyendo la **Web App** y la base de datos **MySQL**.
+  - *Estado del despliegue:* Actualmente existe un detalle de conectividad entre la Web App en la nube y la instancia de MySQL. Sin embargo, la conexión a la base de datos desde el entorno local funciona correctamente.
+  - *Seguridad:* En esta etapa de pruebas, las credenciales se mantienen directamente en el código base. Para la siguiente entrega se implementará el uso de **variables de entorno (App Settings / Azure Key Vault)** para proteger el acceso. Dado que se trata de un servidor de pruebas aislado, no representa un riesgo para la integridad del sistema.
+
+- **Endpoints e Integración:**
+  - Se desarrollaron e integraron exitosamente los endpoints principales para la navegación del cliente: **Index (Catálogo)**, **Detalle de Producto** y **Carrito de Compras**.
+  - Los endpoints restantes (Administración y Registro) quedan en desarrollo para el próximo bloque de trabajo.
+
+- **Gestión de Usuarios y Carrito:**
+  - Para garantizar el flujo funcional de las compras en esta fase, el carrito opera temporalmente con un usuario estático local (`id_usuario = 1`) prefijado en la BD.
+  - Este esquema se mantendrá de forma transitoria hasta finalizar la implementación completa del módulo de autenticación y sesiones de usuario ya de ofrma autentica o simulada.
 
 
 © 2026 Xucle-Bits - Proyecto Final Programación Web
