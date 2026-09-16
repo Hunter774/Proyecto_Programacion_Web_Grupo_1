@@ -18,10 +18,10 @@
 
     <nav>
       <ul>
-        <li><a href="index.html">Inicio</a></li>
-        <li><a href="#productos">Productos</a></li>
-        <li><a href="componentes/carrito.html">Carrito</a></li>
-        <li><a href="componentes/login.html">Administrador</a></li>
+        <li><a href="{{ url_for('index') }}">Inicio</a></li>
+        <li><a href="{{ url_for('index') }}#productos">Productos</a></li>
+        <li><a href="{{ url_for('carrito') }}">Carrito</a></li>
+        <li><a href="{{ url_for('login') }}">Administrador</a></li>
       </ul>
     </nav>
 
@@ -72,7 +72,7 @@
               <img src="${p.imagen}" alt="${p.nombre}">
               <h3>${p.nombre}</h3>
               <p class="precio">$${p.precio}</p>
-              <a class="btn-principal" href="componentes/detalle.html?id=${p.id}">
+              <a class="btn-principal" href="/detalle/${p.id}">
                 Ver Detalle
               </a>
             </div>

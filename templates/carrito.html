@@ -5,116 +5,69 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Carrito - Xucle-Bits</title>
 
-  <link rel="stylesheet" href="../style.css">
-  <link rel="stylesheet" href="carrito.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='carrito.css') }}">
 </head>
 
 <body>
 
-  <header class="header">
+<header class="header">
+  <div class="logo">
+    <img src="{{ url_for('static', filename='icons/Icono.png') }}" alt="Logo X-Bits" class="logo-img">
+    <h1>X-Bits</h1>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="{{ url_for('index') }}">Inicio</a></li>
+      <li><a href="{{ url_for('index') }}#productos">Productos</a></li>
+      <li><a href="{{ url_for('carrito') }}">Carrito</a></li>
+      <li><a href="{{ url_for('login') }}">Administrador</a></li>
+    </ul>
+  </nav>
+</header>
 
-    <div class="logo">
+<main class="carrito">
+  <h2>Tu Carrito de Compras</h2>
+  <div class="carrito-lista" id="carrito-lista"></div>
+  <div class="resumen-carrito" id="resumen"></div>
+  <div class="carrito-acciones">
+    <a href="{{ url_for('index') }}" class="btn-secundario">Seguir comprando</a>
+    <button class="btn-comprar">Comprar</button>
+  </div>
+</main>
 
-      <img src="../icons/Icono.png"
-           alt="Logo Xucle-Bits"
-           class="logo-img">
+<footer class="footer">
+  <p>&copy; 2026 X-Bits</p>
+  <a href="{{ url_for('terminos') }}">Términos y Condiciones</a> |
+  <a href="{{ url_for('privacidad') }}">Políticas de Privacidad</a>
+</footer>
 
-      <h1>Xucle-Bits</h1>
-
-    </div>
-
-    <nav>
-      <ul>
-        <li><a href="../index.html">Inicio</a></li>
-        <li><a href="../index.html#productos">Productos</a></li>
-        <li><a href="carrito.html">Carrito</a></li>
-        <li><a href="login.html">Administrador</a></li>
-      </ul>
-    </nav>
-
-  </header>
-
-
-  <main class="carrito">
-
-    <h2>Tu Carrito de Compras</h2>
-
-    <div class="carrito-lista">
-
-      <div class="item">
-
-        <img src="https://m.media-amazon.com/images/I/71EjPGMpNgL._AC_SX679_.jpg"
-             alt="Laptop Gamer">
-
-        <div class="info">
-          <h3>Laptop Gamer</h3>
-          <p>$1200</p>
-        </div>
-
-        <button class="btn-eliminar">
-          Eliminar
-        </button>
-
-      </div>
-
-
-      <div class="item">
-
-        <img src="https://m.media-amazon.com/images/I/71pszRoOwUL._AC_SY741_.jpg"
-             alt="Smartphone 5G">
-
-        <div class="info">
-          <h3>Smartphone 5G</h3>
-          <p>$800</p>
-        </div>
-
-        <button class="btn-eliminar">
-          Eliminar
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <div class="resumen-carrito">
-      <p>
-        <b>Total:</b> $2000
-      </p>
-    </div>
-
-
-    <div class="carrito-acciones">
-
-      <a href="../index.html"
-         class="btn-secundario">
-        Seguir comprando
-      </a>
-
-      <button class="btn-comprar">
-        Comprar
-      </button>
-
-    </div>
-
-  </main>
-
-
-  <footer class="footer">
-
-    <p>&copy; 2026 Xucle-Bits</p>
-
-    <a href="terminos.html">
-      Términos y Condiciones
-    </a>
-
-    |
-
-    <a href="privacidad.html">
-      Políticas de Privacidad
-    </a>
-
-  </footer>
+<script>
+  // Por ahora usamos el usuario local con id=1
+  fetch("/carrito/1")
+    .then(res => res.json())
+    .then(data => {
+      const contenedor = document.getElementById("carrito-lista");
+      const resumen = document.getElementById("resumen");
+      contenedor.innerHTML = "";
+      data.items.forEach(item => {
+        contenedor.innerHTML += `
+          <div class="item">
+            <img src="${item.imagen}" alt="${item.nombre}">
+            <div class="info">
+              <h3>${item.nombre}</h3>
+              <p>$${item.precio_unitario} x ${item.cantidad} = $${item.subtotal}</p>
+            </div>
+          </div>
+        `;
+      });
+      resumen.innerHTML = `<p><b>Total:</b> $${data.total}</p>`;
+    })
+    .catch(err => {
+      document.getElementById("carrito-lista").innerHTML = "<p>Error cargando carrito</p>";
+      console.error(err);
+    });
+</script>
 
 </body>
 </html>
