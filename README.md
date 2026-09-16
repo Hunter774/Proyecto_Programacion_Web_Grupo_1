@@ -126,11 +126,16 @@ Proyecto_Programacion_Web_Grupo_1-main
 
 - **Endpoints e Integración:**
   - Se desarrollaron e integraron exitosamente los endpoints principales para la navegación del cliente: **Index (Catálogo)**, **Detalle de Producto** y **Carrito de Compras**.
-  - Los endpoints restantes (Administración y Registro) quedan en desarrollo para el próximo bloque de trabajo.
+  - Los endpoints restantes (Administración y Registro) quedan en desarrollo para el proximo avance.
+  - **Dependencias:** Se reemplazó la librería `PyMySQL` por `mysql-connector-python` debido a incompatibilidades y problemas de conexión surgidos en el entorno de Azure. Para instalar la nueva dependencia en el entorno local/virtual, se debe ejecutar:
+    ```bash
+    pip install mysql-connector-python
+    ```
 
 - **Gestión de Usuarios y Carrito:**
   - Para garantizar el flujo funcional de las compras en esta fase, el carrito opera temporalmente con un usuario estático local (`id_usuario = 1`) prefijado en la BD.
   - Este esquema se mantendrá de forma transitoria hasta finalizar la implementación completa del módulo de autenticación y sesiones de usuario ya de ofrma autentica o simulada.
+
 
 
 © 2026 Xucle-Bits - Proyecto Final Programación Web
