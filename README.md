@@ -109,7 +109,7 @@ Proyecto_Programacion_Web_Grupo_1-main
 
 ## Enlaces
 - Repositorio: https://github.com/Hunter774/Proyecto_Programacion_Web_Grupo_1
-- Despliegue: webapp123-ckagcjc4f5c3frae.centralus-01.azurewebsites.net
+- Despliegue: https://webapp123-ckagcjc4f5c3frae.centralus-01.azurewebsites.net/
 
 ## Entregables
 - **Avance I (Semana 5, 23/08/26)** → Diseño grafico de las páginas.  
