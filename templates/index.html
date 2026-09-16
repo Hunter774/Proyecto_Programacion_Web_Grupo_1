@@ -19,7 +19,7 @@
     <nav>
       <ul>
         <li><a href="{{ url_for('index') }}">Inicio</a></li>
-        <li><a href="{{ url_for('index') }}#productos">Productos</a></li>
+        <li><a href="{{ url_for('index') }}">Productos</a></li>
         <li><a href="{{ url_for('carrito') }}">Carrito</a></li>
         <li><a href="{{ url_for('login') }}">Administrador</a></li>
       </ul>
@@ -46,14 +46,13 @@
   <footer class="footer">
 
     <p>&copy; 2026 X-Bits</p>
-
-    <a href="componentes/terminos.html">
+    <a href="{{ url_for('terminos') }}">
       Términos y Condiciones
     </a>
 
     |
 
-    <a href="componentes/privacidad.html">
+    <a href="{{ url_for('privacidad') }}">
       Políticas de Privacidad
     </a>
 

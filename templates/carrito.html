@@ -43,30 +43,66 @@
 </footer>
 
 <script>
-  // Por ahora usamos el usuario local con id=1
-  fetch("/carrito/1")
-    .then(res => res.json())
-    .then(data => {
-      const contenedor = document.getElementById("carrito-lista");
-      const resumen = document.getElementById("resumen");
-      contenedor.innerHTML = "";
-      data.items.forEach(item => {
-        contenedor.innerHTML += `
-          <div class="item">
-            <img src="${item.imagen}" alt="${item.nombre}">
-            <div class="info">
-              <h3>${item.nombre}</h3>
-              <p>$${item.precio_unitario} x ${item.cantidad} = $${item.subtotal}</p>
+  function cargarCarrito() {
+    fetch("/carrito/1")
+      .then(res => res.json())
+      .then(data => {
+        const contenedor = document.getElementById("carrito-lista");
+        const resumen = document.getElementById("resumen");
+        contenedor.innerHTML = "";
+
+        if (!data.items || data.items.length === 0) {
+          contenedor.innerHTML = "<p>El carrito está vacío.</p>";
+          resumen.innerHTML = "<p><b>Total:</b> $0</p>";
+          return;
+        }
+
+        data.items.forEach(item => {
+          const idEliminar = item.id_detalle || item.id_producto;
+
+          contenedor.innerHTML += `
+            <div class="item" style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="display: flex; align-items: center; gap: 15px;">
+                <img src="${item.imagen}" alt="${item.nombre}">
+                <div class="info">
+                  <h3>${item.nombre}</h3>
+                  <p>$${item.precio_unitario} x ${item.cantidad} = $${item.subtotal}</p>
+                </div>
+              </div>
+              <button class="btn-eliminar" onclick="eliminar(${idEliminar})" style="background-color: #e74c3c; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer;">
+                Eliminar
+              </button>
             </div>
-          </div>
-        `;
+          `;
+        });
+        resumen.innerHTML = `<p><b>Total:</b> $${data.total}</p>`;
+      })
+      .catch(err => {
+        document.getElementById("carrito-lista").innerHTML = "<p>Error cargando carrito</p>";
+        console.error(err);
       });
-      resumen.innerHTML = `<p><b>Total:</b> $${data.total}</p>`;
+  }
+
+  function eliminar(id_detalle) {
+    if (!confirm("¿Seguro que deseas eliminar este producto del carrito?")) return;
+
+    fetch(`/carrito/eliminar/${id_detalle}`, {
+      method: "DELETE"
+    })
+    .then(async res => {
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Error al eliminar");
+      return data;
+    })
+    .then(data => {
+      cargarCarrito();
     })
     .catch(err => {
-      document.getElementById("carrito-lista").innerHTML = "<p>Error cargando carrito</p>";
+      alert("No se pudo eliminar: " + err.message);
       console.error(err);
     });
+  }
+  cargarCarrito();
 </script>
 
 </body>

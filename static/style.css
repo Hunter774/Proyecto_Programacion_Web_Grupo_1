@@ -11,9 +11,7 @@ body {
   color: white;
 }
 
-
 /* Encabezado */
-
 .header {
   background: rgba(5, 15, 27, 0.88);
   border-bottom: 1px solid rgba(0, 140, 255, 0.25);
@@ -52,15 +50,10 @@ nav a {
   font-weight: bold;
 }
 
-
 /* Contenido general */
-
 .catalogo,
 .pagina {
   padding: 40px;
-}
-
-.catalogo {
   text-align: center;
 }
 
@@ -76,9 +69,7 @@ nav a {
   color: #a9b7c7;
 }
 
-
 /* Productos */
-
 .productos {
   display: flex;
   gap: 25px;
@@ -115,9 +106,7 @@ nav a {
   color: #a9b7c7;
 }
 
-
 /* Botones */
-
 .btn-principal,
 .btn-secundario,
 .btn-eliminar,
@@ -148,9 +137,7 @@ nav a {
   background: linear-gradient(135deg, #00c853, #009624);
 }
 
-
-/* Formularios */
-
+/* Formularios Generales */
 .formulario {
   max-width: 650px;
   margin: 25px auto;
@@ -158,6 +145,7 @@ nav a {
   background: rgba(5, 15, 27, 0.88);
   border: 1px solid rgba(0, 140, 255, 0.25);
   border-radius: 12px;
+  text-align: left;
 }
 
 .formulario label {
@@ -186,9 +174,39 @@ nav a {
   flex-wrap: wrap;
 }
 
+/* ESPECÍFICO PARA EL LOGIN (Compacto) */
+.pagina .formulario {
+  max-width: 380px; 
+  margin: 30px auto;
+  box-shadow: 0 0 20px rgba(0, 140, 255, 0.2);
+}
+
+.pagina .formulario input {
+  background: #071321;
+  color: #fff;
+  border: 1px solid rgba(0, 140, 255, 0.3);
+}
+
+.pagina .formulario input:focus {
+  outline: none;
+  border-color: #4db8ff;
+  box-shadow: 0 0 8px rgba(77, 184, 255, 0.4);
+}
+
+.pagina .form-acciones {
+  display: flex;
+  flex-direction: column; 
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.pagina .form-acciones .btn-principal,
+.pagina .form-acciones .btn-secundario {
+  width: 100%;
+  text-align: center;
+}
 
 /* Tablas */
-
 .tabla-contenedor {
   margin-top: 25px;
 }
@@ -210,9 +228,7 @@ th {
   color: #4db8ff;
 }
 
-
 /* Estado de productos */
-
 .estado {
   padding: 5px 10px;
   border-radius: 8px;
@@ -227,9 +243,7 @@ th {
   background: #8a2f2f;
 }
 
-
 /* Detalle del producto */
-
 .detalle-producto {
   display: flex;
   gap: 30px;
@@ -258,9 +272,6 @@ th {
   margin-bottom: 20px;
 }
 
-
-/* Términos y privacidad */
-
 .texto-legal {
   max-width: 900px;
   margin: 25px auto;
@@ -274,9 +285,6 @@ th {
   line-height: 1.5;
   color: #d7e6f4;
 }
-
-
-/* Footer */
 
 .footer {
   background: rgba(5, 15, 27, 0.88);
@@ -292,11 +300,8 @@ th {
   margin: 0 5px;
 }
 
-
 /* Responsive */
-
 @media(max-width:700px) {
-
   .header {
     flex-direction: column;
   }
@@ -323,19 +328,4 @@ th {
   .pagina {
     padding: 25px 15px;
   }
-
 }
-
-
-/*Cosas por hacer
-
--Revisar error del Tenant
--Mejorar la paleta de colores
--Buscar plantilals de Boostrap
--Cambiar el recurso de Static web a Web App (Por si se quiere usar funciones de backend)
--Seguir revisando :v
--Crear mas brances del repositorio para que no se sobreescriba el codigo
--Arreglar el error de la imagen de los productos 
-
-*/
-

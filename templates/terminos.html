@@ -1,19 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
   <meta charset="UTF-8">
-
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-  <title>
-    Términos y Condiciones - Xucle-Bits
-  </title>
-
-  <link rel="stylesheet"
-        href="../style.css">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X-Bits</title>
+  <link rel="stylesheet" href="static/style.css">
 </head>
 
 <body>
@@ -22,11 +13,10 @@
 
     <div class="logo">
 
-      <img src="../icons/Icono.png"
-           alt="Logo Xucle-Bits"
-           class="logo-img">
+      <img src="{{ url_for('static', filename='icons/Icono.png') }}" 
+           alt="Logo X-Bits" class="logo-img">
 
-      <h1>Xucle-Bits</h1>
+      <h1>X-Bits</h1>
 
     </div>
 
@@ -34,7 +24,7 @@
 
       <ul>
         <li>
-          <a href="../index.html">
+          <a href="{{ url_for('index') }}">
             Inicio
           </a>
         </li>
@@ -79,7 +69,7 @@
   <footer class="footer">
 
     <p>
-      &copy; 2026 Xucle-Bits
+      &copy; 2026 X-Bits
     </p>
 
   </footer>
