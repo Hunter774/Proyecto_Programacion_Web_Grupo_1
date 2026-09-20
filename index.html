@@ -4,29 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>X-Bits</title>
-  <link rel="stylesheet" href="static/style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
   <header class="header">
 
     <div class="logo">
-      <img src="{{ url_for('static', filename='icons/Icono.png') }}" 
-           alt="Logo Xucle-Bits" class="logo-img">
+      <img src="static/Icono.png" alt="Logo X-Bits" class="logo-img">
       <h1>X-Bits</h1>
     </div>
 
     <nav>
       <ul>
-        <li><a href="{{ url_for('index') }}">Inicio</a></li>
-        <li><a href="{{ url_for('index') }}">Productos</a></li>
-        <li><a href="{{ url_for('carrito') }}">Carrito</a></li>
-        <li><a href="{{ url_for('login') }}">Administrador</a></li>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="index.html">Productos</a></li>
+        <li><a href="components/carrito.html">Carrito</a></li>
+        <li><a href="components/login.html">Administrador</a></li>
       </ul>
     </nav>
 
   </header>
-
 
   <main class="catalogo" id="productos">
 
@@ -36,31 +34,24 @@
       Tecnología para estudiar, trabajar y disfrutar.
     </p>
 
-    <!--render de los productos dinamicamente -->
+    <!-- Render de los productos dinámicamente -->
     <div class="productos" id="productos-container">
     </div>
 
   </main>
 
-
   <footer class="footer">
 
     <p>&copy; 2026 X-Bits</p>
-    <a href="{{ url_for('terminos') }}">
-      Términos y Condiciones
-    </a>
-
+    <a href="terminos.html">Términos y Condiciones</a>
     |
-
-    <a href="{{ url_for('privacidad') }}">
-      Políticas de Privacidad
-    </a>
+    <a href="privacidad.html">Políticas de Privacidad</a>
 
   </footer>
 
-  <!-- script para jalar productos desde el endpoint -->
+  <!-- Script para jalar productos desde el servidor de Flask -->
   <script>
-    fetch("/productos")
+    fetch("http://127.0.0.1:5000/productos")
       .then(res => res.json())
       .then(data => {
         const contenedor = document.getElementById("productos-container");
@@ -71,7 +62,7 @@
               <img src="${p.imagen}" alt="${p.nombre}">
               <h3>${p.nombre}</h3>
               <p class="precio">$${p.precio}</p>
-              <a class="btn-principal" href="/detalle/${p.id}">
+              <a class="btn-principal" href="detalle.html?id=${p.id}">
                 Ver Detalle
               </a>
             </div>
@@ -85,7 +76,6 @@
 
 </body>
 </html>
-
 <!--
 -El nombre todavia es debatible ajaja
 -Generar Logo y quitar el icono de la computadora
