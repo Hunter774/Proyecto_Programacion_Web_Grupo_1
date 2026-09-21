@@ -3,106 +3,125 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reportes - X-Bits</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <title>Reportes - X-Bits Admin</title>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
 
   <header class="header">
     <div class="logo">
-      <img src="{{ url_for('static', filename='icons/Icono.png') }}" alt="Logo X-Bits" class="logo-img">
-      <h1>X-Bits</h1>
+      <img src="../static/Icono.png" alt="Logo X-Bits" class="logo-img">
+      <h1>X-Bits Admin</h1>
     </div>
 
     <nav>
       <ul>
-        <li><a href="{{ url_for('index') }}">Inicio</a></li>
-        <li><a href="{{ url_for('index') }}#productos">Productos</a></li>
-        <li><a href="{{ url_for('carrito') }}">Carrito</a></li>
-        <li><a href="{{ url_for('login') }}">Administrador</a></li>
+        <li><a href="producto.html">Productos</a></li>
+        <li><a href="reportes.html" style="color: #3498db;">Reportes</a></li>
+        <li><a href="#" id="saludo-admin" style="color: #2ecc71;">Admin</a></li>
+        <li><a href="#" onclick="cerrarSesion()">Salir</a></li>
       </ul>
     </nav>
   </header>
 
   <main class="pagina">
-    <h2>Reporte de Compras Realizadas</h2>
-    <p class="subtitulo">Consulta y filtra el historial de transacciones de la tienda</p>
+    <h2>Reporte de Transacciones y Carritos</h2>
+    <p class="subtitulo">Consulta el historial de productos en los carritos de los usuarios</p>
 
-    <!-- Formulario de Filtros -->
-    <form class="formulario" action="#" method="GET">
+    <form class="formulario" id="form-filtros" onsubmit="event.preventDefault();">
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px;">
         
         <div>
-          <label for="buscar_id">Buscar por ID Comprador/Transacción:</label>
-          <input type="text" id="buscar_id" name="buscar_id" placeholder="Ej: TX-1001">
+          <label for="buscar_cliente">Buscar por Cliente:</label>
+          <input type="text" id="buscar_cliente" placeholder="Ej: Roberto" oninput="filtrarReportes()">
         </div>
 
-        <div>
-          <label for="fecha_inicio">Fecha Inicio:</label>
-          <input type="date" id="fecha_inicio" name="fecha_inicio">
-        </div>
-
-        <div>
-          <label for="fecha_fin">Fecha Fin:</label>
-          <input type="date" id="fecha_fin" name="fecha_fin">
-        </div>
-
-      </div>
-
-      <div class="form-acciones" style="margin-top: 10px;">
-        <button type="button" class="btn-principal">Filtrar</button>
-        <button type="reset" class="btn-secundario">Limpiar Filtros</button>
       </div>
     </form>
 
-    <!-- Tabla de Resultados -->
     <div class="tabla-contenedor">
       <table>
         <thead>
           <tr>
-            <th>ID Compra</th>
-            <th>Fecha</th>
+            <th>ID Detalle</th>
             <th>Cliente</th>
             <th>Producto</th>
-            <th>Total</th>
-            <th>Estado</th>
+            <th>Cantidad</th>
+            <th>Precio Unitario</th>
+            <th>Subtotal</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>#TX-1001</td>
-            <td>2026-09-10</td>
-            <td>Carlos Mendoza</td>
-            <td>Procesador AMD Ryzen 7</td>
-            <td>$280.00</td>
-            <td><span class="estado activo">Completado</span></td>
-          </tr>
-          <tr>
-            <td>#TX-1002</td>
-            <td>2026-09-12</td>
-            <td>Ana Rodríguez</td>
-            <td>Tarjeta de Video RTX 4060</td>
-            <td>$350.00</td>
-            <td><span class="estado activo">Completado</span></td>
-          </tr>
-          <tr>
-            <td>#TX-1003</td>
-            <td>2026-09-14</td>
-            <td>Roberto Gómez</td>
-            <td>Memoria RAM 16GB DDR5</td>
-            <td>$75.00</td>
-            <td><span class="estado inactivo">Cancelado</span></td>
-          </tr>
+        <tbody id="tabla-reportes">
         </tbody>
       </table>
     </div>
   </main>
 
   <footer class="footer">
-    <p>&copy; 2026 X-Bits</p>
-    <a href="#">Términos y Condiciones</a> | <a href="#">Políticas de Privacidad</a>
+    <p>&copy; 2026 X-Bits - Panel de Administración</p>
   </footer>
+
+  <script>
+    const adminData = JSON.parse(localStorage.getItem("adminXBits"));
+    if (!adminData) {
+      alert("Acceso denegado. Inicia sesión primero.");
+      window.location.replace("login.html");
+    } else {
+      document.getElementById("saludo-admin").innerText = `Hola, ${adminData.nombre}`;
+    }
+
+    function cerrarSesion() {
+      localStorage.removeItem("adminXBits");
+      window.location.replace("login.html");
+    }
+
+    let reportesGlobal = [];
+
+    function cargarReportes() {
+      fetch("http://127.0.0.1:5000/reportes")
+        .then(res => res.json())
+        .then(data => {
+          reportesGlobal = data || [];
+          mostrarTabla(reportesGlobal);
+        })
+        .catch(err => {
+          console.error("Error al cargar reportes:", err);
+          document.getElementById("tabla-reportes").innerHTML = `<tr><td colspan="6" style="text-align: center; color: red;">Error al conectar con el servidor.</td></tr>`;
+        });
+    }
+
+    function mostrarTabla(datos) {
+      const tbody = document.getElementById("tabla-reportes");
+      tbody.innerHTML = "";
+
+      if (!datos || datos.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align: center;">No se encontraron registros.</td></tr>`;
+        return;
+      }
+
+      datos.forEach(r => {
+        tbody.innerHTML += `
+          <tr>
+            <td>#TX-${r.id_detalle}</td>
+            <td>${r.cliente}</td>
+            <td>${r.producto}</td>
+            <td>${r.cantidad}</td>
+            <td>$${r.precio_unitario}</td>
+            <td>$${r.subtotal}</td>
+          </tr>
+        `;
+      });
+    }
+
+    function filtrarReportes() {
+      const texto = document.getElementById("buscar_cliente").value.toLowerCase().trim();
+      const filtrados = reportesGlobal.filter(r => r.cliente.toLowerCase().includes(texto));
+      mostrarTabla(filtrados);
+    }
+
+    cargarReportes();
+  </script>
 
 </body>
 </html>

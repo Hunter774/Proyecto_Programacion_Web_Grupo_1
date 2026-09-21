@@ -20,7 +20,7 @@
         <!-- <li><a href="productos.html">Productos</a></li> -->
         <li><a href="reportes.html">Reportes</a></li>
         <!-- <li><a href="../index.html">Tienda</a></li> -->
-        <li><a href="#" id="saludo-admin" style="color: #3498db;">Admin</a></li>
+        <li><a href="#" id="saludo-admin" style="color: #2ecc71;">Admin</a></li>
         <li><a href="#" onclick="cerrarSesion()">Salir</a></li>
       </ul>
     </nav>
@@ -68,8 +68,8 @@
       window.location.href = "login.html";
     }
 
-    function cargarProductosAdmin() {
-      fetch("http://127.0.0.1:5000/productos")
+function cargarProductosAdmin() {
+      fetch("http://127.0.0.1:5000/productos?admin=true")
         .then(res => res.json())
         .then(data => {
           const tbody = document.getElementById("tabla-productos");
@@ -81,8 +81,8 @@
           }
 
           data.forEach(p => {
-            const estadoClase = "activo"; 
-            const estadoTexto = "Activo";
+            const estadoClase = p.estado === 'activo' ? 'activo' : 'inactivo'; 
+            const estadoTexto = p.estado === 'activo' ? 'Activo' : `Inactivo (Stock: ${p.stock})`;
 
             tbody.innerHTML += `
               <tr>
@@ -90,7 +90,7 @@
                 <td>${p.nombre}</td>
                 <td>$${p.precio}</td>
                 <td>
-                  <span class="estado ${estadoClase}">
+                  <span class="estado ${estadoClase}" style="${p.estado !== 'activo' ? 'color: red; font-weight: bold;' : ''}">
                     ${estadoTexto}
                   </span>
                 </td>

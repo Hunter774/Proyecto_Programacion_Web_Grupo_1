@@ -32,7 +32,7 @@
   <div class="resumen-carrito" id="resumen"></div>
   <div class="carrito-acciones">
     <a href="../index.html" class="btn-secundario">Seguir comprando</a>
-    <button class="btn-comprar">Comprar</button>
+    <button class="btn-comprar" onclick="realizarCompra(1)">Comprar</button>
   </div>
 </main>
 
@@ -99,6 +99,27 @@
     })
     .catch(err => {
       alert("No se pudo eliminar: " + err.message);
+      console.error(err);
+    });
+  }
+
+  function realizarCompra(idUsuario) {
+    if (!confirm("¿Deseas confirmar y procesar tu compra?")) return;
+
+    fetch(`http://127.0.0.1:5000/carrito/comprar/${idUsuario}`, {
+      method: "POST"
+    })
+    .then(async res => {
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Error al procesar la compra");
+      return data;
+    })
+    .then(data => {
+      alert("¡Compra realizada con éxito! Se ha generado tu orden.");
+      cargarCarrito();
+    })
+    .catch(err => {
+      alert("No se pudo completar la compra: " + err.message);
       console.error(err);
     });
   }
