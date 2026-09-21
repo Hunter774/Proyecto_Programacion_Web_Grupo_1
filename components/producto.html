@@ -1,197 +1,138 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
   <meta charset="UTF-8">
-
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-  <title>
-    Productos - Administración X-Bits
-  </title>
-
-  <link rel="stylesheet"
-        href="../style.css">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Productos - Administración X-Bits</title>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
 
   <header class="header">
-
     <div class="logo">
-
-      <img src="../icons/Icono.png"
-           alt="Logo Xucle-Bits"
-           class="logo-img">
-
-      <h1>Xucle-Bits Admin</h1>
-
+      <img src="../static/Icono.png" alt="Logo X-Bits" class="logo-img">
+      <h1>X-Bits Admin</h1>
     </div>
 
-
     <nav>
-
       <ul>
-
-        <li>
-          <a href="producto.html">
-            Productos
-          </a>
-        </li>
-
-        <li>
-          <a href="Reportes.html">
-            Reportes
-          </a>
-        </li>
-
-        <li>
-          <a href="../index.html">
-            Tienda
-          </a>
-        </li>
-
+        <!-- <li><a href="productos.html">Productos</a></li> -->
+        <li><a href="reportes.html">Reportes</a></li>
+        <!-- <li><a href="../index.html">Tienda</a></li> -->
+        <li><a href="#" id="saludo-admin" style="color: #3498db;">Admin</a></li>
+        <li><a href="#" onclick="cerrarSesion()">Salir</a></li>
       </ul>
-
     </nav>
-
   </header>
 
-
   <main class="pagina">
+    <h2>Mantenimiento de Productos</h2>
 
-    <h2>
-      Mantenimiento de Productos
-    </h2>
-
-
-    <a href="nuevoProducto.html"
-       class="btn-principal">
+    <a href="nuevoproducto.html" class="btn-principal">
       Agregar Nuevo Producto
     </a>
 
-
     <div class="tabla-contenedor">
-
       <table>
-
-        <tr>
-          <th>ID</th>
-          <th>Producto</th>
-          <th>Precio</th>
-          <th>Estado</th>
-          <th>Acciones</th>
-        </tr>
-
-
-        <tr>
-
-          <td>1</td>
-
-          <td>Laptop Gamer</td>
-
-          <td>$1200</td>
-
-          <td>
-            <span class="estado activo">
-              Activo
-            </span>
-          </td>
-
-          <td>
-
-            <a href="editarProducto.html"
-               class="btn-principal">
-              Editar
-            </a>
-
-            <button type="button"
-                    class="btn-eliminar">
-              Eliminar
-            </button>
-
-          </td>
-
-        </tr>
-
-
-        <tr>
-
-          <td>2</td>
-
-          <td>Smartphone 5G</td>
-
-          <td>$800</td>
-
-          <td>
-            <span class="estado activo">
-              Activo
-            </span>
-          </td>
-
-          <td>
-
-            <a href="editarProducto.html"
-               class="btn-principal">
-              Editar
-            </a>
-
-            <button type="button"
-                    class="btn-eliminar">
-              Eliminar
-            </button>
-
-          </td>
-
-        </tr>
-
-
-        <tr>
-
-          <td>3</td>
-
-          <td>Audífonos Bluetooth</td>
-
-          <td>$150</td>
-
-          <td>
-            <span class="estado inactivo">
-              Inactivo
-            </span>
-          </td>
-
-          <td>
-
-            <a href="editarProducto.html"
-               class="btn-principal">
-              Editar
-            </a>
-
-            <button type="button"
-                    class="btn-eliminar">
-              Eliminar
-            </button>
-
-          </td>
-
-        </tr>
-
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-productos">
+        </tbody>
       </table>
-
     </div>
-
   </main>
 
-
   <footer class="footer">
-
-    <p>
-      &copy; 2026 Xucle-Bits - Administración
-    </p>
-
+    <p>&copy; 2026 X-Bits - Administración</p>
   </footer>
+
+  <script>
+    const adminData = JSON.parse(localStorage.getItem("adminXBits"));
+    if (!adminData) {
+      alert("Acceso denegado. Inicia sesión primero.");
+      window.location.href = "login.html";
+    } else {
+      document.getElementById("saludo-admin").innerText = `Hola, ${adminData.nombre}`;
+    }
+
+    function cerrarSesion() {
+      localStorage.removeItem("adminXBits");
+      window.location.href = "login.html";
+    }
+
+    function cargarProductosAdmin() {
+      fetch("http://127.0.0.1:5000/productos")
+        .then(res => res.json())
+        .then(data => {
+          const tbody = document.getElementById("tabla-productos");
+          tbody.innerHTML = "";
+
+          if (!data || data.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="5" style="text-align: center;">No hay productos registrados.</td></tr>`;
+            return;
+          }
+
+          data.forEach(p => {
+            const estadoClase = "activo"; 
+            const estadoTexto = "Activo";
+
+            tbody.innerHTML += `
+              <tr>
+                <td>${p.id}</td>
+                <td>${p.nombre}</td>
+                <td>$${p.precio}</td>
+                <td>
+                  <span class="estado ${estadoClase}">
+                    ${estadoTexto}
+                  </span>
+                </td>
+                <td>
+                  <a href="editarproducto.html?id=${p.id}" class="btn-principal" style="padding: 5px 10px; font-size: 12px;">
+                    Editar
+                  </a>
+                  <button type="button" class="btn-eliminar" onclick="eliminarProducto(${p.id})" style="background-color: #e74c3c; color: white; border: none; padding: 6px 10px; border-radius: 4px; cursor: pointer;">
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            `;
+          });
+        })
+        .catch(err => {
+          console.error("Error al cargar productos para administración:", err);
+          document.getElementById("tabla-productos").innerHTML = `<tr><td colspan="5" style="text-align: center; color: red;">Error al conectar con el servidor.</td></tr>`;
+        });
+    }
+
+    function eliminarProducto(id) {
+      if (!confirm("¿Estás seguro de eliminar este producto?")) return;
+
+      fetch(`http://127.0.0.1:5000/productos/eliminar/${id}`, {
+        method: "DELETE"
+      })
+      .then(async res => {
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "No se pudo eliminar");
+        return data;
+      })
+      .then(data => {
+        alert(data.message || "Producto eliminado");
+        cargarProductosAdmin();
+      })
+      .catch(err => {
+        alert("Error: " + err.message);
+      });
+    }
+    cargarProductosAdmin();
+  </script>
 
 </body>
 </html>

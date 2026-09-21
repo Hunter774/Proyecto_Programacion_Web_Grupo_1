@@ -1,168 +1,131 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
   <meta charset="UTF-8">
-
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
-  <title>
-    Editar Producto - Xucle-Bits
-  </title>
-
-  <link rel="stylesheet"
-        href="../style.css">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Producto - Xucle-Bits</title>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 
 <body>
 
   <header class="header">
-
     <div class="logo">
-
-      <img src="../icons/Icono.png"
-           alt="Logo Xucle-Bits"
-           class="logo-img">
-
-      <h1>Xucle-Bits Admin</h1>
-
+      <img src="../static/Icono.png" alt="Logo X-Bits" class="logo-img">
+      <h1>X-Bits Admin</h1>
     </div>
-
     <nav>
-
       <ul>
-
-        <li>
-          <a href="producto.html">
-            Productos
-          </a>
-        </li>
-
-        <li>
-          <a href="Reportes.html">
-            Reportes
-          </a>
-        </li>
-
+        <li><a href="producto.html">Productos</a></li>
+        <li><a href="reportes.html">Reportes</a></li>
       </ul>
-
     </nav>
-
   </header>
 
-
   <main class="pagina">
+    <h2>Editar Producto</h2>
 
-    <h2>
-      Editar Producto
-    </h2>
+    <form class="formulario" id="form-editar">
+      <label for="nombre">Nombre del producto:</label>
+      <input type="text" id="nombre" required>
 
+      <label for="descripcion">Descripción:</label>
+      <textarea id="descripcion" required></textarea>
 
-    <form class="formulario">
+      <label for="precio">Precio:</label>
+      <input type="number" step="0.01" id="precio" required>
 
-      <label for="nombre">
-        Nombre del producto:
-      </label>
+      <label for="stock">Cantidad (Stock):</label>
+      <input type="number" id="stock" required>
 
-      <input type="text"
-             id="nombre"
-             value="Laptop Gamer"
-             required>
+      <label for="color">Color:</label>
+      <input type="text" id="color">
 
-
-      <label for="descripcion">
-        Descripción:
-      </label>
-
-      <textarea id="descripcion"
-                required>Computadora portátil para estudio, trabajo y entretenimiento.</textarea>
-
-
-      <label for="precio">
-        Precio:
-      </label>
-
-      <input type="number"
-             id="precio"
-             value="1200"
-             required>
-
-
-      <label for="stock">
-        Cantidad:
-      </label>
-
-      <input type="number"
-             id="stock"
-             value="10"
-             required>
-
-
-      <label for="color">
-        Color:
-      </label>
-
-      <input type="text"
-             id="color"
-             value="Negro">
-
-
-      <label for="estado">
-        Estado:
-      </label>
-
-      <select id="estado"
-              required>
-
-        <option value="activo"
-                selected>
-          Activo
-        </option>
-
-        <option value="inactivo">
-          Inactivo
-        </option>
-
+      <label for="estado">Estado:</label>
+      <select id="estado" required>
+        <option value="activo">Activo</option>
+        <option value="inactivo">Inactivo</option>
       </select>
 
-
-      <label for="imagen">
-        URL de imagen:
-      </label>
-
-      <input type="text"
-             id="imagen"
-             value="https://m.media-amazon.com/images/I/71EjPGMpNgL._AC_SX679_.jpg">
-
+      <label for="imagen">URL de imagen:</label>
+      <input type="text" id="imagen">
 
       <div class="form-acciones">
-
-        <button type="button"
-                class="btn-principal">
-          Guardar Cambios
-        </button>
-
-        <a href="producto.html"
-           class="btn-secundario">
-          Cancelar
-        </a>
-
+        <button type="submit" class="btn-principal">Guardar Cambios</button>
+        <a href="producto.html" class="btn-secundario">Cancelar</a>
       </div>
-
     </form>
-
   </main>
 
-
   <footer class="footer">
-
-    <p>
-      &copy; 2026 Xucle-Bits - Administración
-    </p>
-
+    <p>&copy; 2026 Xucle-Bits - Administración</p>
   </footer>
+
+  <script>
+    // Validar sesión activa antes de dejar entrar a editar
+    const adminData = JSON.parse(localStorage.getItem("adminXBits"));
+    if (!adminData) {
+      alert("Acceso denegado. Inicia sesión primero.");
+      window.location.replace("login.html");
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const idProducto = params.get("id");
+
+    if (!idProducto) {
+      alert("No se especificó un producto para editar.");
+      window.location.replace("producto.html");
+    }
+
+    fetch(`http://127.0.0.1:5000/productos/${idProducto}`)
+      .then(res => res.json())
+      .then(producto => {
+        document.getElementById("nombre").value = producto.nombre || "";
+        document.getElementById("descripcion").value = producto.descripcion || "";
+        document.getElementById("precio").value = producto.precio || "";
+        document.getElementById("stock").value = producto.stock || 0;
+        document.getElementById("color").value = producto.color || "";
+        document.getElementById("estado").value = producto.estado || "activo";
+        document.getElementById("imagen").value = producto.imagen || "";
+      })
+      .catch(err => {
+        console.error("Error al cargar el producto:", err);
+        alert("No se pudieron cargar los datos del producto.");
+      });
+
+    document.getElementById("form-editar").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const datosActualizados = {
+        nombre: document.getElementById("nombre").value.trim(),
+        descripcion: document.getElementById("descripcion").value.trim(),
+        precio: parseFloat(document.getElementById("precio").value),
+        stock: parseInt(document.getElementById("stock").value),
+        color: document.getElementById("color").value.trim(),
+        estado: document.getElementById("estado").value,
+        imagen: document.getElementById("imagen").value.trim()
+      };
+
+      fetch(`http://127.0.0.1:5000/productos/editar/${idProducto}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(datosActualizados)
+      })
+      .then(async res => {
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Error al actualizar");
+        return data;
+      })
+      .then(data => {
+        alert(data.message || "¡Modificado con éxito!");
+        window.location.replace("producto.html");
+      })
+      .catch(err => {
+        console.error("Error:", err);
+        alert("No se pudo guardar: " + err.message);
+      });
+    });
+  </script>
 
 </body>
 </html>

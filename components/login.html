@@ -4,22 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Acceso Admin - X-Bits</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="../css/style.css">
 </head>
-
 <body>
-
 <header class="header">
   <div class="logo">
-    <img src="{{ url_for('static', filename='icons/Icono.png') }}" alt="Logo X-Bits" class="logo-img">
+    <img src="../static/Icono.png" alt="Logo X-Bits" class="logo-img">
     <h1>X-Bits</h1>
   </div>
   <nav>
     <ul>
-      <li><a href="{{ url_for('index') }}">Inicio</a></li>
-      <li><a href="{{ url_for('index') }}#productos">Productos</a></li>
-      <li><a href="{{ url_for('carrito') }}">Carrito</a></li>
-      <li><a href="{{ url_for('login') }}">Administrador</a></li>
+      <li><a href="../index.html">Inicio</a></li>
+      <li><a href="../index.html#productos">Productos</a></li>
+      <li><a href="carrito.html">Carrito</a></li>
+      <li><a href="login.html">Administrador</a></li>
     </ul>
   </nav>
 </header>
@@ -27,7 +25,7 @@
 <main class="pagina">
   <h2>Acceso Administrativo</h2>
 
-  <form class="formulario" action="{{ url_for('login') }}" method="POST">
+  <form class="formulario" id="form-login">
     <label for="usuario">Usuario:</label>
     <input type="text" id="usuario" name="usuario" required>
 
@@ -36,7 +34,7 @@
 
     <div class="form-acciones">
       <button type="submit" class="btn-principal">Ingresar</button>
-      <a href="{{ url_for('login') }}" class="btn-secundario">Registrar Administrador</a>
+      <a href="registro.html" class="btn-secundario">Registrar Administrador</a>
     </div>
   </form>
 </main>
@@ -45,6 +43,40 @@
   <p>&copy; 2026 X-Bits</p>
   <a href="#">Términos y Condiciones</a> | <a href="#">Políticas de Privacidad</a>
 </footer>
+
+<script>
+  document.getElementById("form-login").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const usuario = document.getElementById("usuario").value.trim();
+    const contrasena = document.getElementById("contrasena").value;
+
+    fetch("http://127.0.0.1:5000/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ usuario, contrasena })
+    })
+    .then(async res => {
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Credenciales inválidas");
+      }
+      return data;
+    })
+    .then(data => {
+      localStorage.setItem("adminXBits", JSON.stringify(data.usuario));
+      alert(data.message);
+      window.location.href = "producto.html"; // Nota mental, 
+      // verificar los nombres de los archivos y rutas, ya que 
+      // en el proyecto original se llamaba "productos.html" y no "producto.html"
+      //y peri 1 hora por eso jsjsjsjsjs
+    })
+    .catch(err => {
+      console.error("Error en login:", err);
+      alert("No se pudo iniciar sesión: " + err.message);
+    });
+  });
+</script>
 
 </body>
 </html>
