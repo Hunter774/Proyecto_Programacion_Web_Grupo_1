@@ -108,8 +108,9 @@ Proyecto_Programacion_Web_Grupo_1-main
 - Botón Comprar: verde (#00c853 → #009624)  
 
 ## Enlaces
-- Repositorio: https://github.com/Hunter774/Proyecto_Programacion_Web_Grupo_1
-- Despliegue: https://webapp123-ckagcjc4f5c3frae.centralus-01.azurewebsites.net/
+- Repositorio (Frontend): https://github.com/Hunter774/Proyecto_Programacion_Web_Grupo_1
+-Repostorio (Backend): https://github.com/Hunter774/proyecto-backend
+- Despliegue: (No funcional, solo a nivel de BD)
 
 ## Entregables
 - **Avance I (Semana 5, 23/08/26)** → Diseño grafico de las páginas.  
@@ -136,6 +137,13 @@ Proyecto_Programacion_Web_Grupo_1-main
   - Para garantizar el flujo funcional de las compras en esta fase, el carrito opera temporalmente con un usuario estático local (`id_usuario = 1`) prefijado en la BD.
   - Este esquema se mantendrá de forma transitoria hasta finalizar la implementación completa del módulo de autenticación y sesiones de usuario ya de ofrma autentica o simulada.
 
+## Tercer Avance y Entrega Final - Notas de Desarrollo
 
+Durante esta etapa final se consolidó el funcionamiento central del sistema, logrando integrar la lógica transaccional en la base de datos y el control dinámico de inventarios. Sin embargo, debido a la carga de trabajo individual y al diseño inicial apresurado del esquema relacional, quedaron pendientes detalles importantes que se documentan a continuación con total honestidad.
 
-© 2026 Xucle-Bits - Proyecto Final Programación Web
+- **Arquitectura y Desacoplamiento:** Se llevó a cabo la migración hacia una arquitectura desacoplada a pequeña escala (por capas), separando por completo el backend en Flask como una API REST y el frontend estático mediante solicitudes asíncronas con `fetch`.
+- **Lógica Transaccional y Control de Stock:** Se implementó con éxito el procesamiento de compras con commits explícitos, garantizando que al finalizar una transacción se descuenten las unidades del inventario y el producto se inactive automáticamente al llegar a cero stock.
+- **Módulo de Reportes:** El reporte de transacciones se limitó a mostrar el listado general; los filtros avanzados por fechas y la búsqueda por ID de compra no se completaron en su totalidad por falta de tiempo y sobrecarga de trabajo individual.
+- **Diseño de Base de Datos:** Las relaciones entre `CarritoDetalle`, `Ordenes` y `OrdenDetalle` presentaron inconsistencias iniciales derivadas de un diseño apresurado que requirieron ajustes, evidenciando áreas de mejora en la normalización temprana del esquema.
+
+© 2026 X-Bits - Proyecto Final Programación Web

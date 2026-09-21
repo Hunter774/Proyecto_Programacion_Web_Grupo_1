@@ -45,6 +45,7 @@
         .then(res => res.json())
         .then(producto => {
           const idProducto = producto.id_producto || producto.id;
+          const stockDisponible = producto.stock !== undefined ? producto.stock : 0;
 
           document.getElementById("detalle").innerHTML = `
             <img src="${producto.imagen_url || producto.imagen}" alt="${producto.nombre}">
@@ -52,7 +53,11 @@
               <h2>${producto.nombre}</h2>
               <p><b>Precio:</b> $${producto.precio}</p>
               <p><b>Descripción:</b> ${producto.descripcion}</p>
-              <button class="btn-principal" onclick="agregar(${idProducto})">Agregar al Carrito</button>
+              <p><b>Stock disponible:</b> <span style="color: ${stockDisponible > 0 ? '#2ecc71' : '#e74c3c'}; font-weight: bold;">${stockDisponible} unidades</span></p>
+              ${stockDisponible > 0 
+                ? `<button class="btn-principal" onclick="agregar(${idProducto})">Agregar al Carrito</button>`
+                : `<p style="color: #e74c3c; font-weight: bold;">Producto Agotado</p>`
+              }
             </div>
           `;
         })
